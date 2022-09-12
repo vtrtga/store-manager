@@ -5,13 +5,21 @@ const getAll = async () => {
 
   return result;
 };
+
 const getById = async (id) => {
   const result = await productModel.getProductById(id);
-  console.log(result);
   
   return result;
 };
+
+const insert = async (product) => {
+  const result = await productModel.assignProduct(product);
+
+  return result;
+};
+
 module.exports = {
+  insert,
   getAll,
   getById,
 };

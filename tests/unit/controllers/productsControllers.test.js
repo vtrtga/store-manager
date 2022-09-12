@@ -1,7 +1,10 @@
 const { expect } = require('chai');
 const sinon = require('sinon');
-// const { productsService } = require('../../../src/services');
+const { productsService } = require('../../../src/services');
+const { newProduct, updatedProducts } = require('./mocks/products.controller.mock')
+        
 const { productController } = require('../../../src/controllers')
+
 describe("Testing products controller", function () {
   const res = {};
   const req = {};
@@ -31,3 +34,25 @@ describe("Testing products controller", function () {
     expect(res.status.calledWith(404)).to.be.equal(true);
   })
 }) 
+
+describe("Testing post method to update products db", function () {
+  afterEach(function () {
+    sinon.restore()
+  });
+  beforeEach(function () {
+    sinon.stub(productsService, 'insert')
+    .resolves(4)
+  })
+  afterEach(() => {
+    res.status = sinon.stub().returns(res);
+    res.json = sinon.stub().returns();
+  })
+  it("Testing if it's called with status 201", async function () {
+    const res = {};
+
+    const req = {
+      body: newProduct
+    }
+  
+})
+})
