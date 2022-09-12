@@ -48,12 +48,42 @@ describe("[Controller] Testing post method to update products db", function () {
     const req = {
       body: newProduct
     };
-
     res.status = sinon.stub().returns(res);
     res.json = sinon.stub().returns();
 
     await productController.insert(req, res);
 
     expect(res.status.calledWith(201)).to.be.equal(true);
+  })
+  it("Testing with invalid product name", async function () {
+    const invalidProductName = 'oito'
+    const req = {
+      body: {
+        name: invalidProductName,
+      },
+    };
+    const res = {};
+
+    res.status = sinon.stub().returns(res);
+    res.json = sinon.stub().returns();
+    
+    productController.insert(req, res);
+    
+    expect(res.status.calledWith(422)).to.be.equal(true);
+  })
+  it("Testing without product name", async function () {
+    const req = {
+      body: {
+       name: '',
+     },
+    } 
+    const res = {};
+
+    res.status = sinon.stub().returns(res);
+    res.json = sinon.stub().returns();
+
+    await productController.insert(req, res);
+    
+    expect(res.status.calledWith(400)).to.be.equal(true);
   })
 })
