@@ -1,6 +1,5 @@
 const { expect } = require('chai');
 const sinon = require('sinon');
-const connection = require('../../../src/connection');
 const { productModel } = require('../../../src/models'); //MODELS FUNCTIONS
 const { productsService } = require('../../../src/services');
 
@@ -19,7 +18,7 @@ describe("Type of service layer functions returns", function () {
   })
 })
 
-describe("Testing products service", function () {
+describe("[Service]Testing getAll", function () {
   afterEach(async function () {
     sinon.restore();
   });
@@ -48,4 +47,19 @@ describe("Testing products service", function () {
 
       expect(result).to.be.deep.equal([])
     })
+})
+
+describe("[Service] Testing insert", function () {
+  afterEach(function () {
+    sinon.restore();
+  })
+  it("With success", async function () {
+    const newItem = "Livro Harry Potter e o Prisioneiro de Azkaban";
+
+    sinon.stub(productModel, 'assignProduct').resolves(4)
+    
+    const result = await productsService.insert(newItem);
+
+    expect(result).to.equal(4);
+  })
 })

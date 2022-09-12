@@ -39,11 +39,10 @@ describe("[Controller] Testing post method to update products db", function () {
   afterEach(function () {
     sinon.restore()
   });
-  beforeEach(function () {
-    sinon.stub(productsService, 'insert')
-    .resolves(4)
-  })
   it("Testing if it's called with status 201", async function () {
+    sinon.stub(productsService, 'insert')
+      .resolves(4);
+    
     const res = {};
 
     const req = {
@@ -56,5 +55,5 @@ describe("[Controller] Testing post method to update products db", function () {
     await productController.insert(req, res);
 
     expect(res.status.calledWith(201)).to.be.equal(true);
-})
+  })
 })
