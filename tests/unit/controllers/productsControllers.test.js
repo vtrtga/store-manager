@@ -5,7 +5,7 @@ const { newProduct, updatedProducts } = require('./mocks/products.controller.moc
         
 const { productController } = require('../../../src/controllers')
 
-describe("Testing products controller", function () {
+describe("[Controller] Testing getAll and getById", function () {
   const res = {};
   const req = {};
   afterEach(sinon.restore);
@@ -35,7 +35,7 @@ describe("Testing products controller", function () {
   })
 }) 
 
-describe("Testing post method to update products db", function () {
+describe("[Controller] Testing post method to update products db", function () {
   afterEach(function () {
     sinon.restore()
   });
@@ -43,16 +43,18 @@ describe("Testing post method to update products db", function () {
     sinon.stub(productsService, 'insert')
     .resolves(4)
   })
-  afterEach(() => {
-    res.status = sinon.stub().returns(res);
-    res.json = sinon.stub().returns();
-  })
   it("Testing if it's called with status 201", async function () {
     const res = {};
 
     const req = {
       body: newProduct
-    }
-  
+    };
+
+    res.status = sinon.stub().returns(res);
+    res.json = sinon.stub().returns();
+
+    await productController.insert(req, res);
+
+    expect(res.status.calledWith(201)).to.be.equal(true);
 })
 })
