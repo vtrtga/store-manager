@@ -1,5 +1,5 @@
 const express = require('express');
-const { productRoutes } = require('./routers');
+const { productRoutes, salesRoutes } = require('./routers');
 
 const app = express();
 
@@ -8,6 +8,8 @@ app.get('/', (_request, response) => {
   response.send();
 });
 app.use(express.json());
+
+app.use('/sales', salesRoutes);
 
 app.use('/products', productRoutes);
 
