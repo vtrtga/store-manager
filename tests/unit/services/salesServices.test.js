@@ -20,7 +20,7 @@ describe("[Service]Testing getAll", function () {
   })
 })
 
-describe("[Service]Testing function that assign a date for a sale", function () {
+describe("[Service]Testing sale assign", function () {
   afterEach(function () {
     sinon.restore();
   })

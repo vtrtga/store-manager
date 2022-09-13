@@ -5,13 +5,27 @@ const getAllSales = async () => {
     `SELECT sp.sale_id as saleId, s.date,
     sp.product_id as productId, sp.quantity FROM sales_products as sp
     JOIN products as p ON sp.product_id = p.id
-    JOIN sales as s ON p.id = s.id;`,
+    JOIN sales as s ON sp.sale_id = s.id
+    ORDER BY s.id, p.id;`,
     [],
   );
   return result;
 };
 
-const saleAssign = async () => {
+const getSaleById = async (id) => {
+  const [result] = await connection.execute(
+    `SELECT s.date,
+    sp.product_id as productId, sp.quantity FROM sales_products as sp
+    JOIN products as p ON sp.product_id = p.id
+    JOIN sales as s ON p.id = s.id 
+    WHERE sp.sale_id = ?;`,
+    [id],
+  );
+  
+  return result;
+};
+
+const saleDateAssign = async () => {
   const [{ insertId }] = await connection.execute(
     'INSERT INTO StoreManager.sales (date) VALUES (NOW())',
     [],
@@ -19,7 +33,18 @@ const saleAssign = async () => {
   return insertId;
 };
 
-module.exports = {
-  saleAssign,
-  getAllSales,
+const saleAssign = async (sales) => {
+  const saleId = await saleDateAssign();
+  await Promise.all(sales.map(async (s) => {
+    await connection.execute(
+      'INSERT INTO sales_products (sale_id, product_id, quantity) VALUES (?, ?, ?)',
+      [saleId, s.productId, s.quantity],
+    );
+}));
+return saleId;
 };
+  module.exports = { 
+    saleAssign,
+    getSaleById,
+    getAllSales,
+  };
