@@ -17,7 +17,7 @@ const getSaleById = async (id) => {
     `SELECT s.date,
     sp.product_id as productId, sp.quantity FROM sales_products as sp
     JOIN products as p ON sp.product_id = p.id
-    JOIN sales as s ON p.id = s.id 
+    JOIN sales as s ON sp.sale_id = s.id 
     WHERE sp.sale_id = ?;`,
     [id],
   );
