@@ -16,8 +16,10 @@ const getById = async (req, res) => {
 };
 
 const saleAssign = async (req, res) => {
-  await salesService.saleAssign(req.body);
-
+  const result = await salesService.saleAssign(req.body);
+  if (result.length < 1) {
+    return res.status(404).json({ message: 'Product not found' });
+  }
   return res.status(201).json(req.body);
 };
 module.exports = {
