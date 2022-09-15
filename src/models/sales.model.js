@@ -34,13 +34,14 @@ const saleDateAssign = async () => {
 };
 
 const saleAssign = async (sales) => {
-  await Promise.all(sales.map(async (s) => {
-    const id = await saleDateAssign();
+  const id = await saleDateAssign();
+  const result = await Promise.all(sales.map(async (s) => {
     await connection.execute(
       'INSERT INTO sales_products (sale_id, product_id, quantity) VALUES (?, ?, ?)',
       [id, s.productId, s.quantity],
     );
   }));
+  return { result, id };
 };
   module.exports = { 
     saleAssign,
