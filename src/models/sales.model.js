@@ -43,7 +43,8 @@ const saleAssign = async (sales) => {
   }));
   return { result, id };
 };
-  module.exports = { 
+module.exports = { 
+    saleDateAssign,
     saleAssign,
     getSaleById,
     getAllSales,

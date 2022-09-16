@@ -2,7 +2,7 @@ const { expect } = require('chai');
 const sinon = require('sinon');
 
 const { salesModel } = require('../../../src/models')
-const { allSalesModel } = require('./mocks/sales.models.mock')
+const { newSaleMock, allSalesModel} = require('./mocks/sales.models.mock')
 
 describe("[Model]Testing getAll sales", function () {
   afterEach(function () {
@@ -15,13 +15,13 @@ describe("[Model]Testing getAll sales", function () {
   })
 })
 
-describe("[Model]Testing function that assign a date for a sale", function () {
+describe("[Model]Testing the function that registers sales", function () {
   afterEach(function () {
     sinon.restore();
   })
   it("Testing if the function returns the sale id", async function () {
-    const result = await (salesModel.saleAssign())
+    const result = await salesModel.saleAssign(newSaleMock);
 
-    expect(result).to.be.equal(3);
+    expect(result.id).to.be.equal(3);
   })
 })

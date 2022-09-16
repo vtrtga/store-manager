@@ -4,14 +4,14 @@ const sinon = require('sinon');
 const { salesService } = require('../../../src/services');
 const { salesModel } = require('../../../src/models')
 
-const { allSalesService } = require('./mocks/sales.service.mock')
-const { allSalesModel } = require('../models/mocks/sales.models.mock')
+const { registeredSaleTest, newSaleMock } = require('./mocks/sales.service.mock')
+const { allSalesService } = require('../models/mocks/sales.models.mock')
 describe("[Service]Testing getAll", function () {
   afterEach(function () {
     sinon.restore();
   })
   it("Testing getAll function return", async function () {
-    sinon.stub(salesModel, 'getAllSales').resolves(allSalesModel)
+    sinon.stub(salesModel, 'getAllSales').resolves(allSalesService)
 
     const result = await salesService.getAll()
 
@@ -20,14 +20,14 @@ describe("[Service]Testing getAll", function () {
   })
 })
 
-describe("[Service]Testing sale assign", function () {
+describe("[Service]Testing sale date assign", function () {
   afterEach(function () {
     sinon.restore();
   })
   it("Testing if the function is called", async function () {
-    sinon.stub(salesModel, 'saleAssign').resolves(2);
-    const result = await salesService.saleAssign()
+    sinon.stub(salesModel, 'saleAssign').resolves(newSaleMock);
+    const result = await salesService.saleAssign(registeredSaleTest)
 
-    expect(result).to.be.equal(2);
+    expect(result).to.be.equal(newSaleMock);
   })
 })

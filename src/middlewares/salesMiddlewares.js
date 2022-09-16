@@ -19,9 +19,8 @@ const salesValidation = (req, res, next) => {
 const productExist = async (req, res, next) => {
   const { body } = req;
   const result = await Promise.all(body.map(async (item) => {
-    const p = await getById(item.productId);
-    console.log(p);
-    return p;
+    const products = await getById(item.productId);
+    return products;
   }));
   const someEmpty = result.some((e) => e.length < 1);
 
