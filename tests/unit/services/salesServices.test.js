@@ -4,7 +4,7 @@ const sinon = require('sinon');
 const { salesService } = require('../../../src/services');
 const { salesModel } = require('../../../src/models')
 
-const { registeredSaleTest, newSaleMock } = require('./mocks/sales.service.mock')
+const { registeredSaleMock, newSaleMock } = require('./mocks/sales.service.mock')
 const { allSalesService } = require('../models/mocks/sales.models.mock')
 describe("[Service]Testing getAll", function () {
   afterEach(function () {
@@ -20,14 +20,16 @@ describe("[Service]Testing getAll", function () {
   })
 })
 
-describe("[Service]Testing sale date assign", function () {
+describe("[Service]Testing sale assign", function () {
   afterEach(function () {
     sinon.restore();
   })
   it("Testing if the function is called", async function () {
-    sinon.stub(salesModel, 'saleAssign').resolves(newSaleMock);
-    const result = await salesService.saleAssign(registeredSaleTest)
+    sinon.stub(salesModel, 'saleAssign').resolves(registeredSaleMock);
+    const result = await salesService.saleAssign(newSaleMock)
 
-    expect(result).to.be.equal(newSaleMock);
+    console.log(result)
+
+    expect(result.id).to.be.equal(3);
   })
 })

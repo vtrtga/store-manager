@@ -1,24 +1,3 @@
-const allSalesModel = [
-  {
-    saleId: 1,
-    date: new Date(),
-    productId: 1,
-    quantity: 5
-  },
-  {
-    saleId: 1,
-    date: new Date(),
-    productId: 2,
-    quantity: 10
-  },
-  {
-    saleId: 2,
-    date: new Date(),
-    productId: 3,
-    quantity: 15
-  }
-]
-
 const registeredSaleMock = {
   id: 3,
   itemsSold: [
@@ -47,5 +26,4 @@ const newSaleMock = [
 module.exports = {
   newSaleMock,
   registeredSaleMock,
-  allSalesModel,
 }
