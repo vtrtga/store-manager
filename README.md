@@ -9,3 +9,4 @@ Foram utlizadas as seguintes tecnologias:
 - Joi para validações de rotas
 - MySQL
 - Docker
+- Mocha/Chai para testes
