@@ -1,16 +1,11 @@
-# 🚧 README em construção 🚧
+Projeto Store Manager
 
-<!-- Olá, Tryber!
+Projeto foi desenvolvido por mim, como estudante da Trybe.
+O projeto é baseado em um CRUD de uma aplicação e-commerce.
 
-Esse é apenas um arquivo inicial para o README do seu projeto.
-
-É essencial que você preencha esse documento por conta própria, ok?
-
-Não deixe de usar nossas dicas de escrita de README de projetos, e deixe sua criatividade brilhar!
-
-⚠️ IMPORTANTE: você precisa deixar nítido:
-- quais arquivos/pastas foram desenvolvidos por você; 
-- quais arquivos/pastas foram desenvolvidos por outra pessoa estudante;
-- quais arquivos/pastas foram desenvolvidos pela Trybe.
-
--->
+Foram utlizadas as seguintes tecnologias: 
+- Javascript
+- NodeJS
+- Joi para validações de rotas
+- MySQL
+- Docker
